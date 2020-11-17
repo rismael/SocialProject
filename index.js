@@ -1,9 +1,7 @@
 
 console.log('Running...')
 //This code uses 'twit' as the API Library simplifying the use of Twitter's API
-var Twit = requirejs(['twit'], function(util){
-
-});
+var Twit = require('twit');
 //fs is used for writing to files
 const fs = require('fs');
 const request = require('request');
@@ -44,11 +42,3 @@ function gotData(err, data, response)
     }
 }
 
-
-
-
-request("https://graph.facebook.com/v9.0/ig_hashtag_search?user_id=659052581640158&q=bluebottle&access_token={302f1caf9dda257dae02c8ec052cf32d}", { json: true }, (err, res, body) => {
-  if (err) { return console.log(err); }
-  console.log(body.url);
-  console.log(body.explanation);
-});
