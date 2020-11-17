@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "http": "0.0.1-security",
     "request": "^2.88.2",
     "twit": "^2.2.11"
   }
