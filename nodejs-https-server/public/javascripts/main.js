@@ -6,7 +6,13 @@ var api_url = 'https://api.instagram.com/'
 function makeAuthLink(){
     var link = api_url + 'oauth/authorize?' + querystring.stringify({client_id : config.app_id, redirect_uri : config.redirect_uri, scope : 'user_profile,user_media', response_type: 'code'});
     link = querystring.unescape(link);
-    console.log(link);
+    //console.log(link);
+    return makeAuthLink;
 }
 
-makeAuthLink();
+function placeAuthLink(link)
+{
+    document.getElementsByClassName('ig-auth-link').href = link;
+}
+
+placeAuthLink(makeAuthLink());
