@@ -1,15 +1,16 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
    body
+    | <div id="fb-root"></div>
+    | <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=659052581640158&autoLogAppEvents=1" nonce="iJXaG7i5"></script>
     | <script>
-    |
+    |   console.log('Starting...');
     |   function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
-    |     console.log('statusChangeCallback');
+    |     console.log('status change');
     |     console.log(response);                   // The current login status of the person.
     |      if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+    |       //console.log(response.authResponse.accessToken);
     |       testAPI();  
     |     } else {                                 // Not logged into your webpage or we are unable to tell.
     |       document.getElementById('status').innerHTML = 'Please log ' +
@@ -19,16 +20,18 @@ block content
     |   function checkLoginState() {               // Called when a person is finished with the Login Button.
     |     FB.getLoginStatus(function(response) {   // See the onlogin handler
     |       statusChangeCallback(response);
+    |       console.log('checkLoginState');
     |     });
     |   } 
     |   window.fbAsyncInit = function() {
     |     FB.init({
-    |       appId      : '{app-id}',
+    |       appId      : '659052581640158',
     |       cookie     : true,                     // Enable cookies to allow the server to access the session.
     |       xfbml      : true,                     // Parse social plugins on this webpage.
-    |       version    : '{api-version}'           // Use this Graph API version for this call.
+    |       version    : 'v9.0'           // Use this Graph API version for this call.
     |     }); 
     |     FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
+    |        console.log("getting login status");
     |       statusChangeCallback(response);        // Returns the login status.
     |     });
     |   };
@@ -40,10 +43,16 @@ block content
     |       console.log('Successful login for: ' + response.name);
     |       document.getElementById('status').innerHTML =
     |         'Thanks for logging in, ' + response.name + '!';
+    |       FB.api('/me', function(response){
+    |          console.log(response);  
+    |       });
     |     });
     |   } 
+    |  //FB.logout(function(response) {
+    | // Person is now logged out            //For when we want to implement logout button
+    | //}); 
     | </script>
-
+    
     | <div class="title">
     |   <h1>Text and Photo Matcher</h1>
     |   <div class="about">
@@ -54,9 +63,10 @@ block content
     |   </div>
     |</div>
     |<div class="button-container">
-    |   <div class="fb-login-button" data-size="medium" data-button-type="login_with" data-layout="rounded"
-    |       data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
+    |   <div class="fb-login-button" data-size="medium" data-button-type="continue_with" data-layout="default" data-auto-logout-link="true" data-use-continue-as="true" data-width="" data-onlogin="checkLoginState();"></div>
     | </div>
+    | <div id="status"></div>
+    | <div class="ig-auth-link"> <a href="https://api.instagram.com/oauth/authorize?client_id=1002279130264801&redirect_uri=https://localhost:3000/&scope=user_profile,user_media&response_type=code">Instagram Access</a></div>
     | <div class="table-main">
     |   <div class="table-title">
     |       <h2>It's A Match!</h2>
@@ -72,26 +82,4 @@ block content
     |</div>
     |<hr>
     | </div>
-    | <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=659052581640158&autoLogAppEvents=1"nonce="yDWh8Wzr"></script>
-    | <script>
-    |   window.fbAsyncInit = function () {
-    |      FB.init({
-    |         appId: '659052581640158',
-    |         cookie: true,
-    |         xfbml: true,
-    |         version: 'v9.0'
-    |       });
-    |
-    |      FB.AppEvents.logPageView();
-    |
-    |      };
-    |
-    |     (function (d, s, id) {
-    |      var js, fjs = d.getElementsByTagName(s)[0];
-    |         if (d.getElementById(id)) { return; }
-    |         js = d.createElement(s); js.id = id;
-    |         js.src = "https://connect.facebook.net/en_US/sdk.js";
-    |         fjs.parentNode.insertBefore(js, fjs);
-    |     }
-    |     (document, 'script', 'facebook-jssdk'));
-    |</script>
+    

@@ -6,3 +6,53 @@ body {
 a {
   color: #00B7FF;
 }
+
+* {
+  margin: 0;
+  background-color: gainsboro;
+}
+.button-container {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+
+}
+
+.fb-login-button {
+  padding-top: 1rem;
+  width: 200px;
+  /*padding-left: 100px;*/
+}
+
+#status {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 0.5rem;
+}
+
+
+.title {
+  width: auto;
+  text-align: center;
+}
+
+.about {
+  padding-top:  2rem;
+}
+
+.table-main {
+  padding-top: 3rem;
+  text-align: center;
+}
+.table-subtitle {
+  display: flex
+}
+
+.table-subtitle-left, .table-subtitle-right {
+  padding-top: 1rem;
+  width: 50%;
+}
+
