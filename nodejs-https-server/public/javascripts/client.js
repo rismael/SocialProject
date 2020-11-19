@@ -16,8 +16,8 @@ function update_ig_auth_link() {
     try{
         if(xhttp.readyState == XMLHttpRequest.DONE){
             if(xhttp.status == 200){
-                alert('Time to modify href >:)');
-                console.log(xhttp.response)
+                //console.log(xhttp.response);
+                document.getElementsByClassName("ig-auth-link")[0].href = xhttp.responseText;
             }
             else{
                 console.log('Problem with the Request');
