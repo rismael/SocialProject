@@ -10,9 +10,6 @@ function makeAuthLink(){
     return makeAuthLink;
 }
 
-function placeAuthLink(link)
-{
-    document.getElementsByClassName('ig-auth-link').href = link;
+module.exports = {
+    insta_auth_link : makeAuthLink()
 }
-
-placeAuthLink(makeAuthLink());

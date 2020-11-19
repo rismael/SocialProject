@@ -1,6 +1,10 @@
 extends layout
 
 block content
+   head
+      script
+         include ../public/javascripts/client.js
+      link(rel='stylesheet', href='/stylesheets/style.css')
    body
     | <div id="fb-root"></div>
     | <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=659052581640158&autoLogAppEvents=1" nonce="iJXaG7i5"></script>
@@ -66,7 +70,7 @@ block content
     |   <div class="fb-login-button" data-size="medium" data-button-type="continue_with" data-layout="default" data-auto-logout-link="true" data-use-continue-as="true" data-width="" data-onlogin="checkLoginState();"></div>
     | </div>
     | <div id="status"></div>
-    | <div class="ig-auth-link-container"> <a class="ig-auth-link" href="">Instagram Access</a></div>
+    | <div class="ig-auth-link-container"> <a class="ig-auth-link" href="https://localhost:3000/users">Instagram Access</a></div>
     | <div class="table-main">
     |   <div class="table-title">
     |       <h2>It's A Match!</h2>
