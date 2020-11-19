@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET Google Auth listing. */
+/* GET Users listing. */
 router.get('/', function(req, res, next) {
   res.send('Help me');
 });

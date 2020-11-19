@@ -1,6 +1,6 @@
 var xhttp = new XMLHttpRequest();
 console.log('AJAX is running');
-
+window.onload = make_request;
 
 function make_request(){
     if(!xhttp) {
@@ -8,7 +8,7 @@ function make_request(){
         return false;
     }
     xhttp.onreadystatechange = update_ig_auth_link;
-    xhttp.open('GET', 'users');
+    xhttp.open('GET', 'igAuth', true);
     xhttp.send();
 }
 
@@ -17,6 +17,7 @@ function update_ig_auth_link() {
         if(xhttp.readyState == XMLHttpRequest.DONE){
             if(xhttp.status == 200){
                 alert('Time to modify href >:)');
+                console.log(xhttp.response)
             }
             else{
                 console.log('Problem with the Request');
