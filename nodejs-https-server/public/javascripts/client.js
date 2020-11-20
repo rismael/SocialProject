@@ -1,8 +1,8 @@
 var xhttp = new XMLHttpRequest();
 console.log('AJAX is running');
-window.onload = make_request;
-var queryString;
-const urlParams = new URLSearchParams(queryString);
+window.onload = make_request();
+window.onload = get_code();
+
 
 function make_request(){
     if(!xhttp) {
@@ -12,6 +12,12 @@ function make_request(){
     xhttp.onreadystatechange = update_ig_auth_link;
     xhttp.open('GET', 'igAuth', true);
     xhttp.send();
+}
+
+function get_code(){
+    const queryString = window.location.search;
+    console.log(queryString);
+    const urlParams = new URLSearchParams(queryString);
 }
 
 function update_ig_auth_link() {
