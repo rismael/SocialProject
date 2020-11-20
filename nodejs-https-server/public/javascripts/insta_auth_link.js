@@ -28,9 +28,9 @@ function createTokenRequest(code){
         'redirect_uri' : config.redirect_uri,
         'code' : code    
     };
-
+    
     axios
-        .post(api_url + 'oauth/access_token', form)
+        .post(api_url + 'oauth/access_token', querystring.stringify(data))
         .then(res => {
             console.log(`statusCode: ${res.statusCode}`)
             console.log(res)
@@ -38,7 +38,24 @@ function createTokenRequest(code){
         .catch(error => {
             console.error(error)
         })
-    
+
+   /*
+   axios({
+    method: 'post',
+    url: api_url + 'oauth/access_token',
+    data: querystring.stringify(data),
+    headers: {'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Length' : data.length }
+    })
+    .then(function (response) {
+        //handle success
+        console.log(response);
+    })
+    .catch(function (response) {
+        //handle error
+        console.log(response);
+    });
+    */
     
     
     
