@@ -1,6 +1,8 @@
 var xhttp = new XMLHttpRequest();
 console.log('AJAX is running');
 window.onload = make_request;
+var queryString;
+const urlParams = new URLSearchParams(queryString);
 
 function make_request(){
     if(!xhttp) {
