@@ -6,71 +6,19 @@ block content
          include ../public/javascripts/client.js
       link(rel='stylesheet', href='/stylesheets/style.css')
    body
-    | <div id="fb-root"></div>
-    | <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=659052581640158&autoLogAppEvents=1" nonce="iJXaG7i5"></script>
-    | <script>
-    |   //console.log('Starting...');
-    |   function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
-    |     //console.log('status change');
-    |     //console.log(response);                   // The current login status of the person.
-    |      if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-    |       console.log(response.authResponse.accessToken);
-    |       testAPI();  
-    |     } else {                                 // Not logged into your webpage or we are unable to tell.
-    |       document.getElementById('status').innerHTML = 'Please log ' +
-    |         'into this webpage.';
-    |     }
-    |   } 
-    |   function checkLoginState() {               // Called when a person is finished with the Login Button.
-    |     FB.getLoginStatus(function(response) {   // See the onlogin handler
-    |       statusChangeCallback(response);
-    |       console.log(response);
-    |     });
-    |   } 
-    |   window.fbAsyncInit = function() {
-    |     FB.init({
-    |       appId      : '659052581640158',
-    |       cookie     : true,                     // Enable cookies to allow the server to access the session.
-    |       xfbml      : true,                     // Parse social plugins on this webpage.
-    |       version    : 'v9.0'           // Use this Graph API version for this call.
-    |     }); 
-    |     FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
-    |        //console.log("getting login status");
-    |       statusChangeCallback(response);        // Returns the login status.
-    |     });
-    |   };
-    |  
-    |   function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-    |
-    |    console.log('Welcome!  Fetching your information.... ');
-    |     FB.api('/me', function(response) {
-    |       console.log('Successful login for: ' + response.name);
-    |       //document.getElementById('status').innerHTML =
-    |       //  'Thanks for logging in, ' + response.name + '!';
-    |       FB.api('/me', function(response){
-    |          //console.log(response);  
-    |       });
-    |     });
-    |   } 
-    |  //FB.logout(function(response) {
-    | // Person is now logged out            //For when we want to implement logout button
-    | //}); 
-    | </script>
-    
     | <div class="title">
     |   <h1>Text and Photo Matcher</h1>
     |   <div class="about">
-    |       <span>With the use of Instagram and Twitter we are able to match the users tweets with a related users
-    |           Instagram picture. This requires use of the user's Instagram and Twitter. The resulting match will be
-    |           displayed below.
+    |       <span>With the use of Imgur and Twitter we are able to match the users tweets with a related images on Imgur. This requires use of a user's Twitter. 
+    |             At the moment a dummy Twitter account is used. In the future using the user's Twitter account will be allowed. The resulting match will be
+    |             displayed below.
     |       </span>
     |   </div>
     |</div>
     |<div class="button-container">
-    |   <div class="fb-login-button" data-size="medium" data-button-type="continue_with" data-layout="default" data-auto-logout-link="true" data-use-continue-as="false" data-width="" data-onlogin="checkLoginState();"></div>
+    |   <button></button>
     | </div>
     | <div id="status"></div>
-    | <div class="ig-auth-link-container"> <a class="ig-auth-link" href="">Instagram Access</a></div>
     | <div class="table-main">
     |   <div class="table-title">
     |       <h2>It's A Match!</h2>
@@ -80,7 +28,7 @@ block content
     |           <h3>User's Twitter Text</h3>
     |       </div>
     |       <div class="table-subtitle-right">
-    |           <h3>Found Instagram Post</h3>
+    |           <h3>Found Related Image</h3>
     |       </div>
     |   </div>
     |</div>
