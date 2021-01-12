@@ -18,14 +18,16 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next){
         if(!req.body) {
-            console.log('failed');
+            //console.log('failed');
             return res.sendStatus(400);
         }
         if(req.body.code){
-            console.log('runing');
+            //console.log('running');
             igAuth.getToken(req.body.code);
+            return res.sendStatus(200);
         }
-        res.sendStatus(200);
+        return res.sendStatus(500);
+        
 })
 
 module.exports = router;
