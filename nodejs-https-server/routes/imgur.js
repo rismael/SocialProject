@@ -21,7 +21,7 @@ function make_request() {
         }
     }
     xhttp.open('GET', 'https://api.imgur.com/3/account/robotaimg', true);
-    xhttp.setRequestHeader('Authorization', 'Client-ID 55c9e2a6eb38999');
+    xhttp.setRequestHeader('Authorization', 'Client-ID');
     xhttp.setRequestHeader('Accept', 'application/json');
     xhttp.send();
 }
