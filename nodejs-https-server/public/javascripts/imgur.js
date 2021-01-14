@@ -30,16 +30,21 @@ const axios = require('axios');
 */
 const get_images = async (tweet) => {
     try {
-        const res = await axios.get('https://api.imgur.com/3/account/' + tweet, {
+        const res = await axios.get('https://api.imgur.com/3/gallery/search/1?q=cats', {
             headers: {
                 'Authorization': 'Client-ID ' + config.client_id
             }
         });
         console.log('Success! ' + res.status);
-        console.log(res.data);
+        console.log(res.data.data[0].link);
+        //console.log(temp.data[0]);
     } catch (err) {
         console.error(err);
     }
 };
 
+get_images('eh');
 module.exports = {get_images};
+
+
+//https://api.imgur.com/3/gallery/search/{{sort}}/{{window}}/{{page}}?q=cats
