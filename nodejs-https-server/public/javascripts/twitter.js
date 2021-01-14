@@ -13,10 +13,10 @@ var params = { count: 3,
                 "tweet_mode" : "extended"
             };
 //We want to get User's timeline. Response is sent to the function gotData
-T.get('statuses/home_timeline', params, gotData);
+T.get('statuses/home_timeline', params, get_tweets);
 
-//gotData processes the response and gets/displays the text of the tweets
-function gotData(err, data, response)
+//getTweets processes the response and gets/displays the text of the tweets
+function get_tweets(err, data, response)
 {
     //console.log(data);
     for(var i = 0; i < data.length; i++)
@@ -47,4 +47,4 @@ function gotData(err, data, response)
 }
 
 
-
+module.exports = {get_tweets};
