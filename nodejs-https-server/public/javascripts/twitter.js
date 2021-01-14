@@ -6,7 +6,7 @@ var Twit = require('twit');
 const fs = require('fs');
 const request = require('request');
 //config file is used to access Tokens/Keys
-var config = require('./config');
+var config = require('../../keys/twitter_credentials.js');
 var T = new Twit(config);
 //parameters for the query
 var params = { count: 3,
@@ -31,14 +31,18 @@ function gotData(err, data, response)
         {
             tweet = data[i].full_text;
         }
+        var tweet_array = [];
+        tweet_array[i] = tweet;
+        //console.log(tweet_array[i]);
+        return tweet_array;
 
-        console.log("- " + tweet);
+        //console.log("- " + tweet);
         //fs.appendFileSync('output.txt', 'Untouched- ' + data[i].full_text + '\n', handleMe);
-        fs.appendFileSync('output.txt', tweet + '\n', handleMe);
-        function handleMe(err)
-        {
-            if(err) console.log('err');
-        }
+        //fs.appendFileSync('output.txt', tweet + '\n', handleMe);
+        //function handleMe(err)
+        //{
+        //    if(err) console.log('err');
+        //}
     }
 }
 
