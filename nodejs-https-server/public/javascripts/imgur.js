@@ -30,7 +30,7 @@ const axios = require('axios');
 */
 const get_images = async (tweet) => {
     try {
-        const res = await axios.get('https://api.imgur.com/3/gallery/search/1?q=cats', {
+        const res = await axios.get('https://api.imgur.com/3/gallery/search/viral/?q=' + tweet, {
             headers: {
                 'Authorization': 'Client-ID ' + config.client_id
             }
@@ -43,7 +43,6 @@ const get_images = async (tweet) => {
     }
 };
 
-get_images('eh');
 module.exports = {get_images};
 
 
