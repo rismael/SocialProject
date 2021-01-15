@@ -3,7 +3,7 @@
 
 - Running the server
 	* Switch to the 'nodejs-https-server' directory
-	* Use command 'nodemon index.js'
+	* Use command 'nodemon index.js' or 'npm start'
 
 - Accessing the webapp
 	* Type 'https://localhost:3000' in your web browser

@@ -1,5 +1,5 @@
 
-console.log('Running...')
+console.log('twitter.js - Running')
 //This code uses 'twit' as the API Library simplifying the use of Twitter's API
 var Twit = require('twit');
 //fs is used for writing to files
@@ -27,6 +27,7 @@ function response_handler(err, data, response) {
         console.log(data.errors[1].message);
     }
     else{
+        var tweet_array = [];
         for (var i = 0; i < data.length; i++) {
             var tweet;
             //tweets that are Retweets need extra handling
@@ -36,10 +37,9 @@ function response_handler(err, data, response) {
             else {
                 tweet = data[i].full_text;
             }
-            var tweet_array = [];
+            
             tweet_array[i] = tweet;
-            console.log(tweet_array[i]);
-            //return tweet_array;
+            //console.log(tweet_array[i]);
 
             //console.log("- " + tweet);
             //fs.appendFileSync('output.txt', 'Untouched- ' + data[i].full_text + '\n', handleMe);
@@ -49,6 +49,12 @@ function response_handler(err, data, response) {
             //    if (err) console.log(err);
             //}
         }
+        var json_array = JSON.stringify(tweet_array);
+        fs.writeFile('tweets.json', json_array, function(err, result){
+            if(err){
+                console.log('fs ', + err);
+            }
+        });
     }
     
     

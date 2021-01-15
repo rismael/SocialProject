@@ -1,5 +1,5 @@
 //XMLHttpRequest is used in the client side to make Requests to the server   
-console.log('imgur.js is Running');
+console.log('imgur.js - Running');
 var config = require('../../keys/imgur_credentials.js');
 const axios = require('axios');
 
