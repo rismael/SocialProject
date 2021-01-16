@@ -45,5 +45,5 @@ const get_images = async (tweet) => {
 
 module.exports = {get_images};
 
-
+//get_images('After');
 //https://api.imgur.com/3/gallery/search/{{sort}}/{{window}}/{{page}}?q=cats

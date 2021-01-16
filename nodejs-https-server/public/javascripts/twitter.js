@@ -17,6 +17,7 @@ var params = {
 //We want to get User's timeline. Response is sent to the function response_handler
 function get_tweets(){
     T.get('statuses/home_timeline', params, response_handler);
+    //console.log('Tweets Received');
 }
 //response_handler processes the response and gets/displays the text of the tweets
 function response_handler(err, data, response) {
