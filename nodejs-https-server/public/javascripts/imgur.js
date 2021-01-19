@@ -36,7 +36,7 @@ const get_images = async (tweet) => {
             }
         });
         //console.log('Success! ' + res.status);
-        console.log(res.data.data[0].link);
+        //console.log(res.data.data[0].link);
         return res.data.data[0].link;
         //console.log(temp.data[0]);
     } catch (err) {

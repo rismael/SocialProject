@@ -3,10 +3,11 @@ var router = express.Router();
 var imgur = require('../public/javascripts/imgur.js');
 var twitter = require('../public/javascripts/twitter.js')
 var fs = require('fs');
+const { json } = require('express');
 
 function get_random_word(tweet) {
   tweet = tweet.split(' ');
-  console.log(tweet);
+  //console.log(tweet);
   var index = Math.floor((Math.random() * (tweet.length - 1)) + 0);
   return tweet[index];
 }
@@ -28,8 +29,10 @@ router.get('/', function (req, res, next) {
       if(typeof value === 'undefined'){
         value = "https://imgur.com/gallery/pYdnX5g";
       }
-      
-      res.send(text + ' : ' + value);
+      my_json = {};
+      my_json.tweet = String(tweet[0]);
+      my_json.image = String(value);
+      res.json(my_json)
     });
     //console.log('Img link ' + image_link);
     //es.send(text + ' : ' + image_link);

@@ -25,7 +25,8 @@ function response_handler(err, data, response) {
     //console.log(data);
     //console.log(response.status);
     if(data.errors){
-        console.log(data.errors[1].message);
+        process.stdout.write('twitter.js ERROR:');
+        console.log(data);
     }
     else{
         var tweet_array = [];

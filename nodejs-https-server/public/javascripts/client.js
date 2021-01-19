@@ -10,6 +10,7 @@ function get_response(){
     xhttp.onreadystatechange = function() {
         if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
             //console.log(this.response);
+            show_response(this.response);
         }
         else if(this.readyState == XMLHttpRequest.DONE && this.status != 200){
             console.log('what');
@@ -20,5 +21,11 @@ function get_response(){
 }
 
 function show_response(data){
+    
+    data = JSON.parse(data);
+    console.log(data.tweet);
+    console.log(data.image);
+    document.getElementsByClassName('tweet')[0].innerHTML = data.tweet;
+    document.getElementsByClassName('image')[0].innerHTML = data.image;
 
 }
