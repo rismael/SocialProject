@@ -23,12 +23,15 @@ router.get('/', function (req, res, next) {
     console.log('We using ' + tweet[0]);
     var text = get_random_word(tweet[0]);
     console.log('Rand: ' + text);
-    var temp = imgur.get_images(text);
-    console.log(temp);
-    //res.send(temp);
+    var image_link = imgur.get_images(text);
+    image_link.then(value => {
+      res.send(text + ' : ' + value);
+    });
+    //console.log('Img link ' + image_link);
+    //es.send(text + ' : ' + image_link);
   }
   else {
-    res.send('Failed to get JSON');
+    res.statusCode(500);
     return;
   }
 

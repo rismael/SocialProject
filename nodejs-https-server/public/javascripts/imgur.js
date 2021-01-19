@@ -35,8 +35,9 @@ const get_images = async (tweet) => {
                 'Authorization': 'Client-ID ' + config.client_id
             }
         });
-        console.log('Success! ' + res.status);
+        //console.log('Success! ' + res.status);
         console.log(res.data.data[0].link);
+        return res.data.data[0].link;
         //console.log(temp.data[0]);
     } catch (err) {
         console.error(err);

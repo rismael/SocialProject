@@ -1,0 +1,2 @@
+#Ignore tweets.json since it just contains the tweets and any changes that happen with it do not matter
+/tweets.json
