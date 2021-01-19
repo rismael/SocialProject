@@ -3,7 +3,7 @@ extends layout
 block content
    head
       script
-         include ../public/javascripts/imgur.js
+         include ../public/javascripts/client.js
       link(rel='stylesheet', href='/stylesheets/style.css')
    body
     | <div class="title">
@@ -16,9 +16,9 @@ block content
     |       </span>
     |   </div>
     |  <div class="button-fetch">
-    |       <a href="imgur">
-    |          <button>Tutorials Collection</button>
-    |       </a>
+    |       
+    |          <button onclick="get_response()">Click Me!</button>
+    |   
     |  </div>
     |</div>
     | <div class="table-main">

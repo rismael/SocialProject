@@ -28,6 +28,7 @@ router.get('/', function (req, res, next) {
       if(typeof value === 'undefined'){
         value = "https://imgur.com/gallery/pYdnX5g";
       }
+      
       res.send(text + ' : ' + value);
     });
     //console.log('Img link ' + image_link);
