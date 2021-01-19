@@ -20,11 +20,14 @@ router.get('/', function (req, res, next) {
   tweet = JSON.parse(tweet);
   //console.log(tweet);
   if (tweet) {
-    console.log('We using ' + tweet[0]);
+    //console.log('We using ' + tweet[0]);
     var text = get_random_word(tweet[0]);
-    console.log('Rand: ' + text);
+    //console.log('Rand: ' + text);
     var image_link = imgur.get_images(text);
     image_link.then(value => {
+      if(typeof value === 'undefined'){
+        value = "https://imgur.com/gallery/pYdnX5g";
+      }
       res.send(text + ' : ' + value);
     });
     //console.log('Img link ' + image_link);

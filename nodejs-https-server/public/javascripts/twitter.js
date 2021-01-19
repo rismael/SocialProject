@@ -11,7 +11,7 @@ const { response } = require('express');
 var T = new Twit(config);
 //parameters for the query
 var params = {
-    count: 3,
+    count: 1,
     "tweet_mode": "extended"
 };
 //We want to get User's timeline. Response is sent to the function response_handler
@@ -57,8 +57,6 @@ function response_handler(err, data, response) {
             }
         });
     }
-    
-    
 }
 
 
