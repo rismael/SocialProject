@@ -9,6 +9,8 @@ const request = require('request');
 var config = require('../../keys/twitter_credentials.js');
 const { response } = require('express');
 var T = new Twit(config);
+
+const axios = require('axios');
 //parameters for the query
 var params = {
     count: 1,
@@ -33,6 +35,7 @@ function response_handler(err, data, response) {
         for (var i = 0; i < data.length; i++) {
             var tweet;
             //tweets that are Retweets need extra handling
+            //console.log(data);
             if (data[i].retweeted_status) {
                 tweet = data[i].retweeted_status.full_text;
             }
@@ -41,6 +44,8 @@ function response_handler(err, data, response) {
             }
             
             tweet_array[i] = tweet;
+            tweet_array[i+1] = data[i].id_str;
+            
             //console.log(tweet_array[i]);
 
             //console.log("- " + tweet);
@@ -60,5 +65,16 @@ function response_handler(err, data, response) {
     }
 }
 
+const oembed_tweet_code = async (tweet_id) => {
+    try {
+        const res = await axios.get('https://publish.twitter.com/oembed?url=https://twitter.com/twitter/status/' + tweet_id);
+        //console.log('Success! ' + res.status);
+        //console.log(res.data.data[0].link);
+        return res.data.html;
+        //console.log(temp.data[0]);
+    } catch (err) {
+        console.error(err);
+    }
+};
 
-module.exports = { get_tweets};
+module.exports = { get_tweets, oembed_tweet_code};

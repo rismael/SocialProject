@@ -25,7 +25,8 @@ function show_response(data){
     data = JSON.parse(data);
     console.log(data.tweet);
     console.log(data.image);
-    document.getElementsByClassName('tweet')[0].innerHTML = data.tweet;
+    console.log(data);
+    document.getElementsByClassName('tweet')[0].innerHTML = data.oembed;
     document.getElementsByClassName('image')[0].innerHTML = data.image;
-
+    
 }
