@@ -20,8 +20,10 @@ var params = {
 function get_tweets(){
     return T.get('statuses/home_timeline', params).then(value => {
         if(value.resp.statusCode == 200){
-            console.log(value.data[0].id_str);
-            return value.data[0].id_str;
+            //console.log(value.data[0].id_str);
+            var id_str = value.data[0].id_str;
+            var text = value.data[0].full_text;
+            return {text, id_str};
         }
         else{
             return -1;
