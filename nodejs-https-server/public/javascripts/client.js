@@ -10,15 +10,37 @@ function get_response(){
     xhttp.onreadystatechange = function() {
         if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
             console.log(this.response);
+            var tweet_text = JSON.parse(this.response);
+            tweet_text = tweet_text.tweet;
+            get_imgur_response(tweet_text);
             //show_response(this.response);
         }
         else if(this.readyState == XMLHttpRequest.DONE && this.status != 200){
-            console.log('what');
+            console.log('Twitter Response, status: ' + this.status);
         }
     }
     xhttp.open('GET', 'logic/twitter');
     xhttp.send();
 }
+
+function get_imgur_response(data){
+    xhttp.onreadystatechange = function() {
+        if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
+            console.log(this.response);
+        }
+        else if(this.readyState == XMLHttpRequest.DONE && this.status != 200){
+            console.log('Imgur Response, status: ' + this.status);
+        }
+    }
+    var my_json = {};
+    my_json.text = data;
+    xhttp.open('POST', 'logic/imgur');
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.send(JSON.stringify(my_json));
+}
+
+
+
 
 function show_response(data){
     

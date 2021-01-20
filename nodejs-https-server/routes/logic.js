@@ -14,23 +14,20 @@ function get_random_word(tweet) {
 
 /* POST logic/imgur. */
 router.post('/imgur', function (req, res, next) {
-  console.log(req.body);
-  var text = get_random_word(tweet[0]);
-  //console.log('Rand: ' + text);
-  var image_link = imgur.get_images(text);
+  //console.log(req.body);
+  var tweet = req.body.text;
+  //console.log(tweet);
+  var word = get_random_word(tweet);
+  //console.log('Rand: ' + word);
+  var image_link = imgur.get_images(word);
   my_json = {};
-
   image_link.then(value => {
     if (typeof value === 'undefined') {
       value = "https://imgur.com/gallery/pYdnX5g";
     }
-    my_json.tweet = String(tweet[0]);
     my_json.image = String(value);
+    res.json(my_json);
   });
-
-  //console.log('Img link ' + image_link);
-  //es.send(text + ' : ' + image_link);
-
 });
 
 router.get('/twitter', function (req, res, next) {
