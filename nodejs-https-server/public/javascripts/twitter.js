@@ -18,7 +18,19 @@ var params = {
 };
 //We want to get User's timeline. Response is sent to the function response_handler
 function get_tweets(){
-    T.get('statuses/home_timeline', params, response_handler);
+    return T.get('statuses/home_timeline', params).then(value => {
+        if(value.resp.statusCode == 200){
+            console.log(value.data[0].id_str);
+            return value.data[0].id_str;
+        }
+        else{
+            return -1;
+        }
+    })
+    .catch(err => {
+        console.log(err);
+        return -1;
+    })
     //console.log('Tweets Received');
 }
 //response_handler processes the response and gets/displays the text of the tweets
@@ -45,7 +57,7 @@ function response_handler(err, data, response) {
             
             tweet_array[i] = tweet;
             tweet_array[i+1] = data[i].id_str;
-            
+            return tweet_array;
             //console.log(tweet_array[i]);
 
             //console.log("- " + tweet);
