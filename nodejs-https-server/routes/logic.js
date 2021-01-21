@@ -23,7 +23,7 @@ router.post('/imgur', function (req, res, next) {
   my_json = {};
   image_link.then(value => {
     if (typeof value === 'undefined') {
-      value = "https://imgur.com/gallery/pYdnX5g";
+      value = "https://i.imgur.com/pYdnX5g.gif";
     }
     my_json.image = String(value);
     res.json(my_json);

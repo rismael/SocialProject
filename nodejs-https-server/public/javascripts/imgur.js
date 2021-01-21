@@ -62,6 +62,10 @@ const get_images = async (tweet) => {
         if(cur == '.' && prev == 'j'){
             return true;
         }
+        //if .p is found then the rest is png
+        else if(cur == '.' && prev == 'p'){
+            return true;
+        }
         //if . is found without a prev j then it's .com
         else if(cur == '.'){
             return false;

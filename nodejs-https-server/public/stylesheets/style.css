@@ -56,10 +56,18 @@ a {
   width: 50%;
 }
 
-grid-container{
+.grid-container{
   display: grid;
-  grid-template-columns: auto auto;
-  background-color: #2196F3;
+  grid-template-columns: auto 50%;
   padding: 10px;
+}
+
+#image{
+  width: 50%;
+  height: 50%;
+}
+
+#tweet{
+  width: auto;
 }
 
