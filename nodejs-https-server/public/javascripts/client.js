@@ -9,10 +9,11 @@ function get_response(){
     }
     xhttp.onreadystatechange = function() {
         if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
-            console.log(this.response);
-            var tweet_text = JSON.parse(this.response);
-            tweet_text = tweet_text.tweet;
-            get_imgur_response(tweet_text);
+            //console.log(this.response);
+            var tweet = JSON.parse(this.response);
+            //console.log('tweet ' + tweet);
+            get_imgur_response(tweet.tweet);
+            show_response(tweet);
             //show_response(this.response);
         }
         else if(this.readyState == XMLHttpRequest.DONE && this.status != 200){
@@ -26,12 +27,15 @@ function get_response(){
 function get_imgur_response(data){
     xhttp.onreadystatechange = function() {
         if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
-            console.log(this.response);
+            //console.log(this.response);
+            var image = JSON.parse(this.response);
+            show_response(image);
         }
         else if(this.readyState == XMLHttpRequest.DONE && this.status != 200){
             console.log('Imgur Response, status: ' + this.status);
         }
     }
+    console.log(data);
     var my_json = {};
     my_json.text = data;
     xhttp.open('POST', 'logic/imgur');
@@ -43,12 +47,30 @@ function get_imgur_response(data){
 
 
 function show_response(data){
-    
-    data = JSON.parse(data);
-    console.log(data.tweet);
-    console.log(data.image);
-    console.log(data);
-    document.getElementsByClassName('tweet')[0].innerHTML = data.oembed;
-    document.getElementsByClassName('image')[0].innerHTML = data.image;
-    
+    if(data.tweet){
+        console.log('text found... ' + data.tweet);
+        console.log(data.oembed_code);
+        document.getElementById('tweet').innerHTML = data.oembed_code;
+    }
+    else if(data.image){
+        console.log('imgur found... ' + data.image);
+        if(is_video(data.image)){
+            document.getElementById('video').src = data.image;
+        }
+        else{
+            document.getElementById('image').src = data.image;
+        }
+    }
+    else{
+        console.log('something went wrong :/');
+        console.log(data);
+    }
+}
+
+function is_video(link){
+    str = String(link);
+    if(str[str.length - 3] == 'm' && str[str.length - 2] == 'p' && str[str.length] == '4'){
+        return true;
+    }
+    return false;
 }

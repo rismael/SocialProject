@@ -36,13 +36,40 @@ const get_images = async (tweet) => {
             }
         });
         //console.log('Success! ' + res.status);
-        //console.log(res.data.data[0].link);
-        return res.data.data[0].link;
+        console.log(res.data.data[0]);
+        if(is_image(res.data.data[0].link)){
+            return res.data.data[0].link; 
+        }
+        else if(!is_image(res.data.data[0].link)){
+            return res.data.data[0].images[0].link;
+        }
+        else{
+            return;
+        }
+        
         //console.log(temp.data[0]);
     } catch (err) {
         console.error(err);
     }
 };
+
+ function is_image(str){
+    var prev = '';
+    var cur = '';
+    for(i = str.length - 1; i >= 0; i--){
+        cur = str[i];
+        //if .j is found then the rest is .jpg
+        if(cur == '.' && prev == 'j'){
+            return true;
+        }
+        //if . is found without a prev j then it's .com
+        else if(cur == '.'){
+            return false;
+        }
+        prev = cur;
+    }
+    return false;
+} 
 
 module.exports = {get_images};
 
