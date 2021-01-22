@@ -37,42 +37,50 @@ const get_images = async (tweet) => {
         });
         //console.log('Success! ' + res.status);
         console.log(res.data.data[0]);
-        if(is_image(res.data.data[0].link)){
-            return res.data.data[0].link; 
+        var data = res.data.data[0];
+        if(data.type){
+            //do somethign
+            console.log('Found a type in the outer region');
+            if(what_type(data.type) == 'image' || what_type(data.type) == 'video'){
+                return data.link;
+            }
         }
-        else if(!is_image(res.data.data[0].link)){
-            return res.data.data[0].images[0].link;
+        else if(!data.type){
+            //look elsewhere
+            console.log('No type in the outer region');
+            if(data.images[0].type)
+            {
+                //do somethign
+                console.log('Found type in the inner region');
+                if(what_type(data.images[0].type) == 'image' || what_type(data.images[0].type) == 'video'){
+                    return data.images[0].link;
+                }
+            }
+            else{
+                //doesnt exist
+                console.log('No type found in outer or inner region.');
+                return;
+            }
+
         }
-        else{
-            return;
-        }
-        
         //console.log(temp.data[0]);
     } catch (err) {
         console.error(err);
     }
 };
 
- function is_image(str){
-    var prev = '';
-    var cur = '';
-    for(i = str.length - 1; i >= 0; i--){
-        cur = str[i];
-        //if .j is found then the rest is .jpg
-        if(cur == '.' && prev == 'j'){
-            return true;
-        }
-        //if .p is found then the rest is png
-        else if(cur == '.' && prev == 'p'){
-            return true;
-        }
-        //if . is found without a prev j then it's .com
-        else if(cur == '.'){
-            return false;
-        }
-        prev = cur;
+ function what_type(str){
+    if(str.includes('image')){
+        console.log('image');
+        return 'image';
     }
-    return false;
+    else if(str.includes('video')){
+        console.log('video');
+        return 'video';
+    }
+    else{
+        return;
+    }
 } 
 
 module.exports = {get_images};

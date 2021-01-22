@@ -54,7 +54,7 @@ function show_response(data){
     }
     else if(data.image){
         console.log('imgur found... ' + data.image);
-        if(is_video(data.image)){
+        if(data.image.includes('.mp4')){
             console.log('its a video!');
             document.getElementById('video').src = data.image;
         }
@@ -67,12 +67,4 @@ function show_response(data){
         console.log(data);
     }
     twttr.widgets.load()
-}
-
-function is_video(link){
-    str = String(link);
-    if(str[str.length - 3] == 'm' && str[str.length - 2] == 'p' && str[str.length - 1] == '4'){
-        return true;
-    }
-    return false;
 }
