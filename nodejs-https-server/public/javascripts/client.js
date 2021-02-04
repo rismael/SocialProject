@@ -1,7 +1,11 @@
+//The file is linked to the index.pug (HTML) file. It sends requests to the server and puts the response's tweet/media in the website.
 const xhttp = new XMLHttpRequest();
 
 
-
+//When the button is clicked this function is called. It sends a GET request to the server's twitter endpoint.
+//The server then responds with a JSON response with the tweets text and the tweets oembed html code.
+//It is then processed and the tweet text is sent to the get_imgur_response function.
+//The oembed tweet html code is sent to the show_response function.
 function get_response(){
     if (!xhttp) {
         console.log('Failed creating XMLHttp instance.');
@@ -24,6 +28,8 @@ function get_response(){
     xhttp.send();
 }
 
+//The get_imgur_response function sends a POST request to the server's imgur endpoint with the tweets text(the data).
+//The server then responds with an image/video link. The link is then sent to the show_response function.
 function get_imgur_response(data){
     xhttp.onreadystatechange = function() {
         if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
@@ -35,7 +41,7 @@ function get_imgur_response(data){
             console.log('Imgur Response, status: ' + this.status);
         }
     }
-    console.log(data);
+    //console.log(data);
     var my_json = {};
     my_json.text = data;
     xhttp.open('POST', 'logic/imgur');
@@ -45,17 +51,17 @@ function get_imgur_response(data){
 
 
 
-
+//The show_response function updates the website with the tweet and image/video link to be displayed to the user.
 function show_response(data){
     if(data.tweet){
-        console.log('text found... ' + data.tweet);
-        console.log(data.oembed_code);
+        //console.log('text found... ' + data.tweet);
+        //console.log(data.oembed_code);
         document.getElementById('tweet').innerHTML = data.oembed_code;
     }
     else if(data.image){
-        console.log('imgur found... ' + data.image);
+        //console.log('imgur found... ' + data.image);
         if(data.image.includes('.mp4')){
-            console.log('its a video!');
+            //console.log('its a video!');
             document.getElementById('video').src = data.image;
         }
         else{
@@ -66,5 +72,7 @@ function show_response(data){
         console.log('something went wrong :/');
         console.log(data);
     }
+    //This function is called to refresh twitter's JS in the index.pug HTML. It is needed when the oembed tweet code is inserted.
+    //It allows for the tweet to look nice.
     twttr.widgets.load()
 }

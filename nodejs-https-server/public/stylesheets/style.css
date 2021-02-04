@@ -1,3 +1,5 @@
+/*Styling elements for the website. */
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -11,28 +13,6 @@ a {
   margin: 0;
   background-color: gainsboro;
 }
-.button-container {
-  width: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-
-}
-
-.fb-login-button {
-  padding-top: 1rem;
-  width: 200px;
-  /*padding-left: 100px;*/
-}
-
-#status {
-  color: red;
-  font-weight: bold;
-  text-align: center;
-  padding-top: 0.5rem;
-}
-
 
 .title {
   width: auto;

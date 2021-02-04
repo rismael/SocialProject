@@ -5,6 +5,7 @@ block content
       script
          include ../public/javascripts/client.js
       link(rel='stylesheet', href='/stylesheets/style.css')
+      //-This script is to allow for the oemebed (embeding) of tweets in the site
       |<script>window.twttr = (function(d, s, id) {
       |var js, fjs = d.getElementsByTagName(s)[0],
       |t = window.twttr || {};
@@ -22,6 +23,7 @@ block content
       |return t;
       |}(document, "script", "twitter-wjs"));</script>
    body
+    //-The body is compromised of the Title, About, Button, Table, Tweets, and Image(media)
     | <div class="title">
     |   <h1>Tweet and Photo Matcher</h1>
     |   <div class="about">
@@ -31,6 +33,7 @@ block content
     |             displayed below.
     |       </span>
     |   </div>
+    //-The button is what starts the calls to the Server to get the Tweet and Media.
     |  <div class="button-fetch">
     |          <button onclick="get_response()">Click Me!</button>
     |  </div>
@@ -48,10 +51,10 @@ block content
     |       </div>
     |   </div>
     |    <hr>
+    //-The grid-container has the div's that will contain the Tweet and image(media) once the response has been to received.
     |    <div class="grid-container">
-    |       
-    |       <div class="tweet" id="tweet">Replace ME</div>
-    |       <div class="imgur"><img id="image" src="" alt="Image ME"><video width="320" height="240" autoplay="autoplay" loop="true"><source id="video" src="" type="video/mp4"></div>
+    |       <div class="tweet" id="tweet"></div>
+    |       <div class="imgur"><img id="image" src="" alt="Click the button!"><video width="320" height="240" autoplay><source id="video" src="" type="video/mp4" /></div>
     |     </div>
     |</div>
     | </div>

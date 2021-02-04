@@ -1,33 +1,13 @@
-//XMLHttpRequest is used in the client side to make Requests to the server   
+//imgur.js is handles the API calls to Imgur. It get media from Imgur and returns the link associated to it.
+//Later the link is used in the front-end to put on the website.
+
 console.log('imgur.js - Running');
 var config = require('../../keys/imgur_credentials.js');
 const axios = require('axios');
 
-
-//Test function to test the Imgur API
-/* function get_images() {
-   if (!xhttp) {
-       console.log('Failed creating XMLHttp instance.');
-       return false;
-   }
-   xhttp.onreadystatechange = function() {
-       if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
-           console.log('Success! ' + this.status);
-
-
-           
-           console.log(this.response);
-           let str = JSON.parse(this.response);
-           console.log(str.data.bio);
-           
-       }
-   }
-   xhttp.open('GET', 'https://api.imgur.com/3/account/robotaimg', true);
-   xhttp.setRequestHeader('Authorization', 'Client-ID' + config.client_id);
-   xhttp.setRequestHeader('Accept', 'application/json');
-   xhttp.send();
-}
-*/
+//get_images calls the imgur API to find media related to the tweet's randomly selected word.
+//The API's response is the processed to find the media link. 
+//The media link is then returned. If no media link was able to be found then nothing is returned.
 const get_images = async (tweet) => {
     try {
         const res = await axios.get('https://api.imgur.com/3/gallery/search/viral/?q=' + tweet, {
@@ -36,29 +16,28 @@ const get_images = async (tweet) => {
             }
         });
         //console.log('Success! ' + res.status);
-        console.log(res.data.data[0]);
+        //console.log(res.data.data[0]);
         var data = res.data.data[0];
-        if(data.type){
-            //do somethign
-            console.log('Found a type in the outer region');
-            if(what_type(data.type) == 'image' || what_type(data.type) == 'video'){
+        if (data.type) {
+            //do something
+            //console.log('Found a type in the outer region');
+            if (what_type(data.type) == 'image' || what_type(data.type) == 'video') {
                 return data.link;
             }
         }
-        else if(!data.type){
+        else if (!data.type) {
             //look elsewhere
-            console.log('No type in the outer region');
-            if(data.images[0].type)
-            {
+            //console.log('No type in the outer region');
+            if (data.images[0].type) {
                 //do somethign
-                console.log('Found type in the inner region');
-                if(what_type(data.images[0].type) == 'image' || what_type(data.images[0].type) == 'video'){
+                //console.log('Found type in the inner region');
+                if (what_type(data.images[0].type) == 'image' || what_type(data.images[0].type) == 'video') {
                     return data.images[0].link;
                 }
             }
-            else{
+            else {
                 //doesnt exist
-                console.log('No type found in outer or inner region.');
+                //console.log('No type found in outer or inner region.');
                 return;
             }
 
@@ -69,21 +48,21 @@ const get_images = async (tweet) => {
     }
 };
 
- function what_type(str){
-    if(str.includes('image')){
-        console.log('image');
+//what_type is used to determine if the media is an image or a video. 
+//We want to make sure the media fits into those two categories.
+//The media type is returned. If it fails nothing is returned.
+function what_type(str) {
+    if (str.includes('image')) {
+        //console.log('image');
         return 'image';
     }
-    else if(str.includes('video')){
-        console.log('video');
+    else if (str.includes('video')) {
+        //console.log('video');
         return 'video';
     }
-    else{
+    else {
         return;
     }
-} 
+}
 
-module.exports = {get_images};
-
-//get_images('After');
-//https://api.imgur.com/3/gallery/search/{{sort}}/{{window}}/{{page}}?q=cats
+module.exports = { get_images };
